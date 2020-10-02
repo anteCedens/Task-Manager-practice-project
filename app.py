@@ -1,6 +1,6 @@
 import os
 from os import path
-from flask import Flask
+from flask import Flask, render_template, redirect, requests, url_for
 from flask_pymongo import Pymongo
 from bson.objectid import ObjectId
 
@@ -12,9 +12,12 @@ if path.exists('env.py'):
 app.config['MONGO_DBNAME'] = os.environ.get('MONGO_DBNAME')
 app.config['MONGO_URI'] = os.environ.get('MONGO_URI')
 
+mongo = PyMongo(app)
+
 
 @app.route('/')
-def hello():
+@app.route('/get_tasks')
+def get_tasks():
     return 'Hello Flask - and Heroku!!'
 
 
